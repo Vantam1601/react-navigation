@@ -639,30 +639,30 @@ export class CardStack extends React.Component<Props, State> {
       }
     }
 
-    const floatingHeader = (
-      <React.Fragment key="header">
-        {renderHeader({
-          mode: 'float',
-          layout,
-          scenes,
-          getPreviousScene: this.getPreviousScene,
-          getFocusedRoute: this.getFocusedRoute,
-          onContentHeightChange: this.handleHeaderLayout,
-          style: [
-            styles.floating,
-            isFloatHeaderAbsolute && [
-              // Without this, the header buttons won't be touchable on Android when headerTransparent: true
-              { height: focusedHeaderHeight },
-              styles.absolute,
-            ],
-          ],
-        })}
-      </React.Fragment>
-    );
+    // const floatingHeader = (
+    //   <React.Fragment key="header">
+    //     {renderHeader({
+    //       mode: 'float',
+    //       layout,
+    //       scenes,
+    //       getPreviousScene: this.getPreviousScene,
+    //       getFocusedRoute: this.getFocusedRoute,
+    //       onContentHeightChange: this.handleHeaderLayout,
+    //       style: [
+    //         styles.floating,
+    //         isFloatHeaderAbsolute && [
+    //           // Without this, the header buttons won't be touchable on Android when headerTransparent: true
+    //           { height: focusedHeaderHeight },
+    //           styles.absolute,
+    //         ],
+    //       ],
+    //     })}
+    //   </React.Fragment>
+    // );
 
     return (
       <View style={styles.container}>
-        {isFloatHeaderAbsolute ? null : floatingHeader}
+        {/* {isFloatHeaderAbsolute ? null : floatingHeader} */}
         <MaybeScreenContainer
           enabled={detachInactiveScreens}
           style={styles.container}
@@ -758,6 +758,24 @@ export class CardStack extends React.Component<Props, State> {
                 homeIndicatorHidden={autoHideHomeIndicator}
                 pointerEvents="box-none"
               >
+                <React.Fragment key="header">
+                  {renderHeader({
+                    mode: 'float',
+                    layout,
+                    scenes,
+                    getPreviousScene: this.getPreviousScene,
+                    getFocusedRoute: this.getFocusedRoute,
+                    onContentHeightChange: this.handleHeaderLayout,
+                    style: [
+                      styles.floating,
+                      isFloatHeaderAbsolute && [
+                        // Without this, the header buttons won't be touchable on Android when headerTransparent: true
+                        { height: focusedHeaderHeight },
+                        styles.absolute,
+                      ],
+                    ],
+                  })}
+                </React.Fragment>
                 <CardContainer
                   index={index}
                   interpolationIndex={interpolationIndex}
@@ -797,7 +815,7 @@ export class CardStack extends React.Component<Props, State> {
             );
           })}
         </MaybeScreenContainer>
-        {isFloatHeaderAbsolute ? floatingHeader : null}
+        {/* {isFloatHeaderAbsolute ? floatingHeader : null} */}
       </View>
     );
   }

@@ -17,9 +17,9 @@ import {
 
 import {
   forNoAnimation,
-  forSlideLeft,
-  forSlideRight,
-  forSlideUp,
+  // forSlideLeft,
+  // forSlideRight,
+  // forSlideUp,
 } from '../../TransitionConfigs/HeaderStyleInterpolators';
 import type {
   Layout,
@@ -95,34 +95,34 @@ export function HeaderContainer({
 
         // If the screen is next to a headerless screen, we need to make the header appear static
         // This makes the header look like it's moving with the screen
-        const previousDescriptor = self[i - 1]?.descriptor;
-        const nextDescriptor = self[i + 1]?.descriptor;
+        // const previousDescriptor = self[i - 1]?.descriptor;
+        // const nextDescriptor = self[i + 1]?.descriptor;
 
-        const {
-          headerShown: previousHeaderShown = true,
-          headerMode: previousHeaderMode,
-        } = previousDescriptor?.options || {};
+        // const {
+        //   headerShown: previousHeaderShown = true,
+        //   headerMode: previousHeaderMode,
+        // } = previousDescriptor?.options || {};
 
         // If any of the next screens don't have a header or header is part of the screen
         // Then we need to move this header offscreen so that it doesn't cover it
-        const nextHeaderlessScene = self.slice(i + 1).find((scene) => {
-          const {
-            headerShown: currentHeaderShown = true,
-            headerMode: currentHeaderMode,
-          } = scene?.descriptor.options || {};
+        // const nextHeaderlessScene = self.slice(i + 1).find((scene) => {
+        //   const {
+        //     headerShown: currentHeaderShown = true,
+        //     headerMode: currentHeaderMode,
+        //   } = scene?.descriptor.options || {};
 
-          return currentHeaderShown === false || currentHeaderMode === 'screen';
-        });
+        //   return currentHeaderShown === false || currentHeaderMode === 'screen';
+        // });
 
-        const { gestureDirection: nextHeaderlessGestureDirection } =
-          nextHeaderlessScene?.descriptor.options || {};
+        // const { gestureDirection: nextHeaderlessGestureDirection } =
+        //   nextHeaderlessScene?.descriptor.options || {};
 
-        const isHeaderStatic =
-          ((previousHeaderShown === false || previousHeaderMode === 'screen') &&
-            // We still need to animate when coming back from next scene
-            // A hacky way to check this is if the next scene exists
-            !nextDescriptor) ||
-          nextHeaderlessScene;
+        // const isHeaderStatic =
+        //   ((previousHeaderShown === false || previousHeaderMode === 'screen') &&
+        //     // We still need to animate when coming back from next scene
+        //     // A hacky way to check this is if the next scene exists
+        //     !nextDescriptor) ||
+        //   nextHeaderlessScene;
 
         const props: StackHeaderProps = {
           layout,
@@ -133,16 +133,7 @@ export function HeaderContainer({
           navigation: scene.descriptor
             .navigation as StackNavigationProp<ParamListBase>,
           styleInterpolator:
-            mode === 'float'
-              ? isHeaderStatic
-                ? nextHeaderlessGestureDirection === 'vertical' ||
-                  nextHeaderlessGestureDirection === 'vertical-inverted'
-                  ? forSlideUp
-                  : nextHeaderlessGestureDirection === 'horizontal-inverted'
-                    ? forSlideRight
-                    : forSlideLeft
-                : headerStyleInterpolator
-              : forNoAnimation,
+            mode === 'float' ? headerStyleInterpolator : forNoAnimation,
         };
 
         return (
